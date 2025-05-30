@@ -4,12 +4,13 @@
 // @version      1
 // @description  it does what it does
 // @author       eeek
-// @match        https://backpack.tf/classifieds?*
+// @match        https://backpack.tf/classifieds*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=backpack.tf
+// @downloadURL   https://github.com/yaboieeek/old-backpack.tf-spells-filter/raw/refs/heads/main/bptf-spells-filter.user.js
+// @updateURL    https://github.com/yaboieeek/old-backpack.tf-spells-filter/raw/refs/heads/main/bptf-spells-filter.user.js
 // @grant        none
 // ==/UserScript==
-(function() {    let windowSpells;
-
+(function() {
 
     const spellsList = [
     "Violent Violet Footprints",
@@ -83,15 +84,11 @@
   style="height: 0px"
 >
   <div class="panel-body">
-    <div class="row">
       <div>
-<div>
+<div class>
   <span class="btn-list" data-key="spell"
     ></span
   >
-</div>
-
-
       </div>
     </div>
   </div>
@@ -100,7 +97,7 @@
     function spellsButtonsGenerator (spellsArray) {
         console.log('generating buttons.....');
             const windowSpell = window.itemFilterModal.model.attributes;
-            let currentSpells = Array.from(windowSpell.spell ? windowSpell.spell.split(', ') : '');
+            let currentSpells = Array.from(windowSpell.spell ? windowSpell.spell.split(',') : '');
         const existingValues = Array.from(document.querySelector('span[data-key = "spell"]').querySelectorAll('input')).map(btn => btn.value);
         spellsArray.forEach(spell => {
             if (existingValues.includes(spell)) return;
@@ -130,7 +127,7 @@
                 } else {
                     currentSpells = currentSpells.filter(spell => spell !== spellToAdd);
                 }
-                Object.assign(windowSpell, {spell: currentSpells.join(', ').trim()})
+                Object.assign(windowSpell, {spell: currentSpells.join(',').trim()})
             })
         })
     }
