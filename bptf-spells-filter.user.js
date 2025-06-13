@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         we need spelled filters on old backpack tf
 // @namespace    eeek
-// @version      1.1
+// @version      1.1.1
 // @description  it does what it does
 // @author       eeek
 // @match        https://backpack.tf/classifieds*
@@ -64,14 +64,18 @@
         for (const mutation of mutationList){
             if (!mutation.type && !targetElement.classList.contains('modal-open')) return;
                  if (document.querySelector('#filter-panels')) {
-                     document.querySelector('#filter-panels').append(spellsPanelElement);
+                     const killstreakerPanel = document.querySelectorAll('#filter-panels .panel')[6];
+                     // document.querySelector('#filter-panels').append(spellsPanelElement);
+                     document.querySelector('#filter-panels').insertBefore(spellsPanelElement, killstreakerPanel)
 
             } else {
                 let interval = setInterval(reloader, 500);
                 function reloader() {
                     if (!document.querySelector('#filter-panels') || typeof window.itemFilterModal === undefined) return;
                     clearInterval(interval);
-                    document.querySelector('#filter-panels').append(spellsPanelElement)
+                     const killstreakerPanel = document.querySelectorAll('#filter-panels .panel')[6];
+                     // document.querySelector('#filter-panels').append(spellsPanelElement);
+                     document.querySelector('#filter-panels').insertBefore(spellsPanelElement, killstreakerPanel)
                     spellsButtonsGenerator(spellsList);
                 }
             }
