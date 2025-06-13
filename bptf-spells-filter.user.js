@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         we need spelled filters on old backpack tf
 // @namespace    eeek
-// @version      1
+// @version      1.1
 // @description  it does what it does
 // @author       eeek
 // @match        https://backpack.tf/classifieds*
@@ -13,23 +13,41 @@
 (function() {
 
     const spellsList = [
-    "Violent Violet Footprints",
-    "Corpse Gray Footprints",
-    "Headless Horseshoes",
-    "Bruised Purple Footprints",
-    "Gangreen Footprints",
-    "Rotten Orange Footprints",
-    "Team Spirit Footprints",
-    "Chromatic Corruption",
-    "Die Job",
-    "Putrescent Pigmentation",
-    "Sinister Staining",
-    "Spectral Spectrum",
-    "Voices from Below",
-    "Exorcism",
-    "Pumpkin Bombs",
-    "Halloween Fire"
-]
+        "Exorcism",
+        "Voices from Below",
+        "Pumpkin Bombs",
+        "Halloween Fire",
+        "Team Spirit Footprints",
+        "Headless Horseshoes",
+        "Corpse Gray Footprints",
+        "Violent Violet Footprints",
+        "Bruised Purple Footprints",
+        "Gangreen Footprints",
+        "Rotten Orange Footprints",
+        "Die Job",
+        "Chromatic Corruption",
+        "Putrescent Pigmentation",
+        "Spectral Spectrum",
+        "Sinister Staining",
+    ]
+    const spellColor = {
+        "Exorcism": '',
+        "Voices from Below": '',
+        "Pumpkin Bombs": '',
+        "Halloween Fire":'',
+        "Team Spirit Footprints": '#546956',
+        "Headless Horseshoes":'#9660EA',
+        "Corpse Gray Footprints":'#7A9465',
+        "Violent Violet Footprints":'#A16854',
+        "Bruised Purple Footprints":'#DB6772',
+        "Gangreen Footprints":'#FFF63D',
+        "Rotten Orange Footprints":'#FD6B20',
+        "Die Job":'#FFE300',
+        "Chromatic Corruption":'#610EC5',
+        "Putrescent Pigmentation":'#C4B040',
+        "Spectral Spectrum":'#ABD0DD',
+        "Sinister Staining":'#78C927',
+    }
     const spellsPanelElement = document.createElement('div');
     spellsPanelElement.classList.add('panel', 'panel-filter');
     spellsPanelElement.setAttribute('id', 'spells-filtering');
@@ -99,10 +117,12 @@
             const windowSpell = window.itemFilterModal.model.attributes;
             let currentSpells = Array.from(windowSpell.spell ? windowSpell.spell.split(',') : '');
         const existingValues = Array.from(document.querySelector('span[data-key = "spell"]').querySelectorAll('input')).map(btn => btn.value);
-        spellsArray.forEach(spell => {
+        spellsArray.forEach((spell, index) => {
             if (existingValues.includes(spell)) return;
 
             const spellElement = document.createElement('label');
+
+
             spellElement.classList.add('btn', 'btn-default', 'btn-multi-filter', 'btn-xs');
             currentSpells.includes(spell) ? spellElement.classList.add('active') : '';
 
@@ -116,6 +136,32 @@
             const placementSelector = spellsPanelElement.querySelector('.btn-list');
             spellElement.append(spellInputButton);
             placementSelector.append(spellElement);
+
+            if (index > 3) {
+                const colorCircle = document
+                .createElement('span');
+                colorCircle.innerText = '⬤ '
+                spellElement.prepend(colorCircle);
+                colorCircle.style.color = spellColor[spell];
+                switch (index) {
+                    case 4: {
+                        const colorCircle = document
+                        .createElement('span');
+                        colorCircle.innerText = '⬤ ';
+                        colorCircle.style = 'color: #FD5845 !important';
+                        spellElement.prepend(colorCircle);
+                        break;
+                    }
+                    case 14: {
+                        const colorCircle = document
+                        .createElement('span');
+                        colorCircle.innerText = '⬤ ';
+                        colorCircle.style = 'color: #FD5845 !important';
+                        spellElement.prepend(colorCircle);
+                        break;
+                    }
+                }
+            }
             spellElement.addEventListener('click', function (event) {
                 event.preventDefault();
                 this.classList.toggle('active');
