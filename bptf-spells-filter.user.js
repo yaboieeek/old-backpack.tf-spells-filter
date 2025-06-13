@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         we need spelled filters on old backpack tf
-// @namespace    eeek
+// @namespace    https://steamcommunity.com/profiles/76561198967088046    
 // @version      1.1.1
 // @description  it does what it does
 // @author       eeek
