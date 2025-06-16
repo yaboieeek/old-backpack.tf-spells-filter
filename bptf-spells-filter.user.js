@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         we need spelled filters on old backpack tf
-// @namespace    https://steamcommunity.com/profiles/76561198967088046    
-// @version      1.1.1
+// @namespace    eeek
+// @version      1.2.0
 // @description  it does what it does
 // @author       eeek
 // @match        https://backpack.tf/classifieds*
+// @match https://backpack.tf/premium/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=backpack.tf
 // @downloadURL   https://github.com/yaboieeek/old-backpack.tf-spells-filter/raw/refs/heads/main/bptf-spells-filter.user.js
 // @updateURL    https://github.com/yaboieeek/old-backpack.tf-spells-filter/raw/refs/heads/main/bptf-spells-filter.user.js
