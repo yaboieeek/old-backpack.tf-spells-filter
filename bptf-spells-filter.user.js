@@ -5,7 +5,7 @@
 // @description  it does what it does
 // @author       eeek
 // @match        https://backpack.tf/classifieds*
-// @match https://backpack.tf/premium/*
+// @match        https://backpack.tf/premium/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=backpack.tf
 // @downloadURL   https://github.com/yaboieeek/old-backpack.tf-spells-filter/raw/refs/heads/main/bptf-spells-filter.user.js
 // @updateURL    https://github.com/yaboieeek/old-backpack.tf-spells-filter/raw/refs/heads/main/bptf-spells-filter.user.js
@@ -90,37 +90,39 @@
 
     spellsPanelElement.innerHTML =
         `<div class="panel-heading">
-  <a
-    class="panel-title collapsed"
-    data-toggle="collapse"
-    data-parent="#filter-panels"
-    href="#panel-spells"
-    aria-expanded="false"
-    >Spells</a
-  >
-</div>
-<div
-  class="panel-collapse collapse"
-  id="panel-spells"
-  data-key="spells"
-  aria-expanded="false"
-  style="height: 0px"
->
-  <div class="panel-body">
-      <div>
-<div class>
-  <span class="btn-list" data-key="spell"
-    ></span
-  >
-      </div>
-    </div>
-  </div>
-</div>
-`
+          <a
+            class="panel-title collapsed"
+            data-toggle="collapse"
+            data-parent="#filter-panels"
+            href="#panel-spells"
+            aria-expanded="false"
+            >Spells</a
+          >
+        </div>
+        <div
+          class="panel-collapse collapse"
+          id="panel-spells"
+          data-key="spells"
+          aria-expanded="false"
+          style="height: 0px"
+        >
+          <div class="panel-body">
+              <div>
+        <div class>
+          <span class="btn-list" data-key="spell"
+            ></span
+          >
+              </div>
+            </div>
+          </div>
+        </div>
+        `
+
+
     function spellsButtonsGenerator (spellsArray) {
         console.log('generating buttons.....');
-            const windowSpell = window.itemFilterModal.model.attributes;
-            let currentSpells = Array.from(windowSpell.spell ? windowSpell.spell.split(',') : '');
+        const windowSpell = window.itemFilterModal.model.attributes;
+        let currentSpells = Array.from(windowSpell.spell ? windowSpell.spell.split(',') : '');
         const existingValues = Array.from(document.querySelector('span[data-key = "spell"]').querySelectorAll('input')).map(btn => btn.value);
         spellsArray.forEach((spell, index) => {
             if (existingValues.includes(spell)) return;
@@ -166,6 +168,15 @@
                         break;
                     }
                 }
+            }
+            if (window.location.href.match(/https:\/\/backpack\.tf\/premium\/*/)) {
+                if (!placementSelector.querySelector('h4')) {
+                    const premSearchAlert = document.createElement('h4');
+                    premSearchAlert.innerText = 'Premium search will only work with one spell clicked';
+                    premSearchAlert.style.color = '#8e44ad';
+                    placementSelector.prepend(premSearchAlert);
+            }
+
             }
             spellElement.addEventListener('click', function (event) {
                 event.preventDefault();
